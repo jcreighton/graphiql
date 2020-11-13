@@ -124,6 +124,7 @@ export type GraphiQLProps = {
   ResultsTooltip?: typeof Component | FunctionComponent;
   readOnly?: boolean;
   docExplorerOpen?: boolean;
+  render?: any;
 };
 
 export type GraphiQLState = {
@@ -476,7 +477,12 @@ export class GraphiQL extends React.Component<GraphiQLProps, GraphiQLState> {
 
     return (
       <Fragment>
-        <div>{'THIS IS WORKING'}</div>
+        {this.props.render &&
+          this.props.render({
+            ExecuteButton,
+            handleToggleDocs: this.handleToggleDocs,
+            Logo: GraphiQL.Logo,
+          })}
         <div
           ref={n => {
             this.graphiqlContainer = n;
